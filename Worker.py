@@ -9,11 +9,12 @@ class ImproperInput(Exception):
 
 
 class Worker():
-    def __init__(self):
+    def __init__(self,level=2):
+        self.level = level
         pass
 
     def output(self,*msg):
-        print(msg)
+        print(*msg)
 
     def input(self):
         data = input()
@@ -24,7 +25,33 @@ class Worker():
         data =str(data)
         data = data.strip(' ')
         data = data.strip('\n')
-        if len(data) >= 1:
+        if len(data) > 1:
             raise ImproperInput('Improper Input')
         else:
             return data
+    def removeEmptyStringFromList(self,data):
+        xdata = []
+        for row in data:
+            if row != '':
+                xdata.append(row)
+        return xdata
+
+
+    def processItem(self,item):
+        item =item.strip(' ')
+        item = item.upper()
+        return item
+    
+    def getList(self,filename):
+        with open(filename,'r') as file:
+            data = file.read()
+            data = data.split('\n')
+            data = self.removeEmptyStringFromList(data)
+            data = [ self.processItem(item) for item in data]
+        return data
+    
+    def debug(self,msg):
+        if self.level >= 0: #Replace with Logging
+            with open('hangman.log','a') as file:
+                file.write('Debug: {}\n'.format(msg))
+
