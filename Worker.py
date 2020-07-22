@@ -16,8 +16,8 @@ class Worker():
     def output(self,*msg):
         print(*msg)
 
-    def input(self):
-        data = input()
+    def input(self,promt):
+        data = input(promt)
         data = self.validateInput(data)
         return data
 

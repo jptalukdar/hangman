@@ -21,17 +21,17 @@ class Game():
             outcome = self.host.playerTurn(self.player.turn())
             if outcome == False:
                 self.lives -= 1
-                self.worker.output('Incorrect, You lose a life. Remaining:{}'.format(self.lives))
+                self.worker.output('{}: Incorrect, You lose a life. Remaining:{}'.format(self.host.hostName,self.lives))
                 if self.lives <=0:
-                    self.worker.output('Your Lives have ended, you lose')
+                    self.worker.output('{}: Your Lives have ended, you lose'.format(self.host.hostName))
                     self.player.setLoss() 
                     break
             else:
-                self.worker.output('Correct Guess')
+                self.worker.output('{}:  Correct Guess'.format(self.host.hostName))
                 if self.host.finished() == True:
-                    self.worker.output('YOU WON')
+                    self.worker.output('{}:  YOU WON'.format(self.host.hostName))
                     break
                 
 
-        self.worker.output('GAME END')
+        self.worker.output('{}: GAME END'.format(self.host.hostName))
 

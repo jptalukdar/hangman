@@ -41,12 +41,12 @@ class Host():
         if self.cards == None:
             raise NoExistingCards()
         card = self.currentCard
-        characters = list(set(card))
+        characters = list(set(card))            #Get list of unique Characters
         self.worker.debug(characters)
         length = len(characters)
-        length = math.ceil(0.5 * length)
-        removedCharacters = random.choices(characters,k=length)
-        removedCharacters = list(set(removedCharacters))
+        length = math.ceil(0.5 * length)        
+        removedCharacters = random.choices(characters,k=length)  #Remove approx 50% of unique Characters
+        removedCharacters = list(set(removedCharacters))        #Remove duplicate characters if given by random
         if ' ' in removedCharacters:
             removedCharacters.remove(' ')
         for i in removedCharacters:
@@ -86,7 +86,7 @@ class Host():
             raise NoExistingCards()
         
         state = self.getCurrentState()
-        self.worker.output(state)
+        self.worker.output('{}: {}'.format(self.hostName,state))
     
     def playerTurn(self,turn):
         turn = turn.upper()

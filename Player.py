@@ -11,7 +11,7 @@ class Player:
             self.worker = worker
 
     def turn(self):
-        myinput = self.worker.input()  #Loose coupled
+        myinput = self.worker.input('{}: '.format(self.playerName))  #Loose coupled
         return myinput
 
     def setPlayerName(self,name):
